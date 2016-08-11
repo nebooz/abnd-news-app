@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.ParseException;
@@ -31,11 +32,22 @@ public class NewsAdapter extends ArrayAdapter<News> {
 
         News news = getItem(position);
 
+        ImageView thumbnailImage = (ImageView) listItemView.findViewById(R.id.thumbnail);
+        thumbnailImage.setImageBitmap(news.getThumbnail());
+
         TextView titleText = (TextView) listItemView.findViewById(R.id.title_text);
         titleText.setText(news.getTitle());
 
         TextView sectionText = (TextView) listItemView.findViewById(R.id.section_text);
         sectionText.setText(news.getSection());
+
+        TextView authorText = (TextView) listItemView.findViewById(R.id.author_text);
+        if (news.getAuthor().equals("")) {
+            authorText.setText(R.string.no_author);
+        } else {
+
+            authorText.setText(news.getAuthor());
+        }
 
         TextView dateText = (TextView) listItemView.findViewById(R.id.date_text);
         dateText.setText(formatDate(news.getDate()));

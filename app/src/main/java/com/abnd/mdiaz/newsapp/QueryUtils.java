@@ -1,5 +1,7 @@
 package com.abnd.mdiaz.newsapp;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -116,8 +118,9 @@ public final class QueryUtils {
 
                 //One 'news'
                 JSONObject newsObject = results.getJSONObject(i);
+                JSONObject fields = newsObject.getJSONObject("fields");
 
-                news.add(new News(newsObject.getString("webTitle"), newsObject.getString("sectionName"), newsObject.getString("webPublicationDate"), newsObject.getString("webUrl")));
+                news.add(new News(newsObject.getString("webTitle"), newsObject.getString("sectionName"), fields.optString("byline"), newsObject.getString("webPublicationDate"), newsObject.getString("webUrl"), getBitmap(fields.getString("thumbnail"))));
             }
 
         } catch (JSONException e) {
@@ -128,6 +131,18 @@ public final class QueryUtils {
         }
 
         return news;
+    }
+
+    private static Bitmap getBitmap(String thumbnail) {
+
+        if (thumbnail != null) {
+            try {
+                return BitmapFactory.decodeStream((InputStream) new URL(thumbnail).getContent());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
 }

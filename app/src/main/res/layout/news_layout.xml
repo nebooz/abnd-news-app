@@ -13,40 +13,63 @@
         android:id="@+id/title_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="8dp"
+        android:layout_toEndOf="@+id/thumbnail"
         android:ellipsize="end"
         android:maxLines="2"
+        android:paddingBottom="2dp"
         android:textColor="#0D47A1"
         android:textSize="16sp"
         android:textStyle="bold"
-        tools:text="News Title"
-        android:layout_marginLeft="8dp"
-        android:layout_alignParentTop="true" />
+        tools:text="News Title" />
 
     <TextView
         android:id="@+id/section_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:paddingRight="3dp"
-        android:maxLines="1"
-        android:textColor="#2196F3"
-        android:textSize="12sp"
-        android:textStyle="italic"
-        tools:text="Section"
+        android:layout_below="@+id/title_text"
         android:layout_marginLeft="8dp"
-        android:layout_below="@+id/title_text" />
+        android:layout_toEndOf="@+id/thumbnail"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingRight="3dp"
+        android:textColor="#2196F3"
+        android:textSize="8sp"
+        android:textStyle="italic"
+        tools:text="Section" />
 
     <TextView
         android:id="@+id/date_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/author_text"
+        android:layout_marginLeft="8dp"
+        android:layout_toEndOf="@+id/thumbnail"
         android:ellipsize="end"
         android:maxLines="1"
         android:paddingTop="4dp"
         android:textColor="#9E9E9E"
-        android:textSize="12sp"
-        tools:text="Publication Date"
+        android:textSize="8sp"
+        tools:text="Publication Date" />
+
+    <ImageView
+        android:id="@+id/thumbnail"
+        android:layout_width="100dp"
+        android:layout_height="86dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:id="@+id/author_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/section_text"
         android:layout_marginLeft="8dp"
-        android:layout_below="@+id/section_text" />
+        android:layout_toEndOf="@+id/thumbnail"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="12sp"
+        tools:text="Author" />
 
 </RelativeLayout>
