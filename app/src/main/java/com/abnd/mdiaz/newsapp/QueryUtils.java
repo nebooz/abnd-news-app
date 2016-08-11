@@ -28,12 +28,6 @@ public final class QueryUtils {
 
     public static List<News> fetchEarthquakeData(URL url) {
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         // Perform HTTP request to the URL and receive a JSON response back
         String jsonResponse = null;
         try {
@@ -74,7 +68,7 @@ public final class QueryUtils {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Problem retrieving the earthquake JSON results.", e);
+            Log.e(LOG_TAG, "Problem retrieving the News JSON results.", e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -118,7 +112,7 @@ public final class QueryUtils {
             //The news array
             JSONArray results = response.getJSONArray("results");
 
-            for (int i=0; i < results.length(); i++) {
+            for (int i = 0; i < results.length(); i++) {
 
                 //One 'news'
                 JSONObject newsObject = results.getJSONObject(i);
@@ -130,7 +124,7 @@ public final class QueryUtils {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
-            Log.e("QueryUtils", "Problem parsing the earthquake JSON results", e);
+            Log.e("QueryUtils", "Problem parsing the News JSON results", e);
         }
 
         return news;

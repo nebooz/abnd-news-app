@@ -6,8 +6,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,8 +25,9 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
     public static final String TARGET_URL =
             "http://content.guardianapis.com/search?tag=technology%2Fgames&from-date=2016-01-01&order-by=newest&page-size=20&api-key=test";
     private NewsAdapter mAdapter;
-    private ListView mNewsListView;
     private TextView mEmptyStateTextView;
+    private SwipeRefreshLayout mRefreshLayout;
+    private ListView mNewsListView;
     private ProgressBar mProgressBar;
 
     @Override
@@ -36,6 +39,32 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
         mNewsListView = (ListView) findViewById(R.id.list);
         mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
         mProgressBar = (ProgressBar) findViewById(R.id.loading_spinner);
+
+        mRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
+
+        //This makes the initial loading spinner start
+        /*mRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mRefreshLayout.setRefreshing(true);
+            }
+        });*/
+
+        //Restart the whole thing when a refresh is triggered
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        checkConnectivity();
+                    }
+                }, 1200);
+
+            }
+        });
 
         mNewsListView.setEmptyView(mEmptyStateTextView);
 
@@ -65,8 +94,10 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
 
         } else {
 
-            mEmptyStateTextView.setText(R.string.no_internet);
+            mRefreshLayout.setRefreshing(false);
             mProgressBar.setVisibility(View.GONE);
+            //mRefreshLayout.setVisibility(View.GONE);
+            mEmptyStateTextView.setText(R.string.no_internet);
 
         }
     }
@@ -79,9 +110,9 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoadFinished(Loader<List<News>> loader, List<News> data) {
 
-        mEmptyStateTextView.setText(R.string.no_earthquakes);
-
+        mRefreshLayout.setRefreshing(false);
         mProgressBar.setVisibility(View.GONE);
+        mEmptyStateTextView.setText(R.string.no_news);
 
         mAdapter.clear();
         mAdapter.setNewsList(data);
