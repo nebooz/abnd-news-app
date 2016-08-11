@@ -8,11 +8,15 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class NewsAdapter extends ArrayAdapter<News> {
 
-    public NewsAdapter(Context context, ArrayList<News> books) {
-        super(context, 0, books);
+    private List<News> mNewsList = new ArrayList<>();
+
+    public NewsAdapter(Context context, ArrayList<News> news) {
+        super(context, 0, news);
+        mNewsList = news;
     }
 
     @Override
@@ -35,6 +39,13 @@ public class NewsAdapter extends ArrayAdapter<News> {
         dateText.setText(news.getDate());
 
         return listItemView;
+
+    }
+
+    public void setNewsList(List<News> newsList) {
+
+        mNewsList.addAll(newsList);
+        notifyDataSetChanged();
 
     }
 

@@ -21,7 +21,7 @@ import java.util.List;
 public class NewsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>> {
 
     public static final String TARGET_URL =
-            "http://content.guardianapis.com/search?from-date=2015-01-01&page-size=50&order-by=newest&section=technology&q=%22video%20games%22%20playstation%20xbox&api-key=test";
+            "http://content.guardianapis.com/search?tag=technology%2Fgames&from-date=2016-01-01&order-by=newest&page-size=20&api-key=test";
     private NewsAdapter mAdapter;
     private ListView mNewsListView;
     private TextView mEmptyStateTextView;
@@ -73,16 +73,25 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public Loader<List<News>> onCreateLoader(int id, Bundle args) {
-        return null;
+        return new NewsLoader(NewsActivity.this, TARGET_URL);
     }
 
     @Override
     public void onLoadFinished(Loader<List<News>> loader, List<News> data) {
 
+        mEmptyStateTextView.setText(R.string.no_earthquakes);
+
+        mProgressBar.setVisibility(View.GONE);
+
+        mAdapter.clear();
+        mAdapter.setNewsList(data);
+
     }
 
     @Override
     public void onLoaderReset(Loader<List<News>> loader) {
+
+        mAdapter.setNewsList(new ArrayList<News>());
 
     }
 }
