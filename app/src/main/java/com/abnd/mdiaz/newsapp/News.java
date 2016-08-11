@@ -1,37 +1,35 @@
 package com.abnd.mdiaz.newsapp;
 
-import android.graphics.Bitmap;
-
 /**
  * Created by neboo on 11-Aug-16.
  */
 public class News {
     private String mTitle;
-    private String mAuthors;
-    private String mDescription;
-    private Bitmap mImage;
+    private String mSection;
+    private String mDate;
+    private String mUrl;
 
-    public News(String title, String authors, String description, Bitmap image) {
+    public News(String title, String section, String date, String url) {
         mTitle = title;
-        mAuthors = authors;
-        mDescription = description;
-        mImage = image;
+        mSection = section;
+        mDate = date;
+        mUrl = url;
     }
 
     public String getTitle() {
         return mTitle;
     }
 
-    public String getAuthors() {
-        return mAuthors;
+    public String getSection() {
+        return mSection;
     }
 
-    public String getDescription() {
-        return mDescription;
+    public String getDate() {
+        return mDate;
     }
 
-    public Bitmap getImage() {
-        return mImage;
+    public String getUrl(){
+        return mUrl;
     }
 
 }
