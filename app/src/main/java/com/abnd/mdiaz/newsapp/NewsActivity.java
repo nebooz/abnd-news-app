@@ -24,6 +24,7 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
 
     public static final String TARGET_URL =
             "http://content.guardianapis.com/search?tag=technology%2Fgames&from-date=2016-01-01&order-by=newest&page-size=20&api-key=test";
+
     private NewsAdapter mAdapter;
     private TextView mEmptyStateTextView;
     private SwipeRefreshLayout mRefreshLayout;
@@ -39,16 +40,7 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
         mNewsListView = (ListView) findViewById(R.id.list);
         mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
         mProgressBar = (ProgressBar) findViewById(R.id.loading_spinner);
-
         mRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
-
-        //This makes the initial loading spinner start
-        /*mRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                mRefreshLayout.setRefreshing(true);
-            }
-        });*/
 
         //Restart the whole thing when a refresh is triggered
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -96,7 +88,6 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
 
             mRefreshLayout.setRefreshing(false);
             mProgressBar.setVisibility(View.GONE);
-            //mRefreshLayout.setVisibility(View.GONE);
             mEmptyStateTextView.setText(R.string.no_internet);
 
         }
