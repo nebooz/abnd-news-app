@@ -52,6 +52,9 @@ public class NewsAdapter extends ArrayAdapter<News> {
         TextView dateText = (TextView) listItemView.findViewById(R.id.date_text);
         dateText.setText(formatDate(news.getDate()));
 
+        TextView trailText = (TextView) listItemView.findViewById(R.id.trail_text);
+        trailText.setText(news.getTrailText());
+
         return listItemView;
 
     }

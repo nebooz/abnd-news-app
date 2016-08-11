@@ -23,7 +23,7 @@ import java.util.List;
 public class NewsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>> {
 
     public static final String TARGET_URL =
-            "http://content.guardianapis.com/search?tag=technology%2Fgames&from-date=2016-01-01&order-by=newest&page-size=20&show-fields=thumbnail%2Cbyline&api-key=test";
+            "http://content.guardianapis.com/search?tag=technology%2Fgames&from-date=2016-01-01&order-by=newest&page-size=20&show-fields=thumbnail%2Cbyline%2CtrailText&api-key=test";
 
     private NewsAdapter mAdapter;
     private TextView mEmptyStateTextView;

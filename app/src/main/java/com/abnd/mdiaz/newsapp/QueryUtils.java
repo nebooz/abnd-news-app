@@ -120,7 +120,7 @@ public final class QueryUtils {
                 JSONObject newsObject = results.getJSONObject(i);
                 JSONObject fields = newsObject.getJSONObject("fields");
 
-                news.add(new News(newsObject.getString("webTitle"), newsObject.getString("sectionName"), fields.optString("byline"), newsObject.getString("webPublicationDate"), newsObject.getString("webUrl"), getBitmap(fields.getString("thumbnail"))));
+                news.add(new News(newsObject.getString("webTitle"), newsObject.getString("sectionName"), fields.optString("byline"), newsObject.getString("webPublicationDate"), fields.optString("trailText"), newsObject.getString("webUrl"), getBitmap(fields.getString("thumbnail"))));
             }
 
         } catch (JSONException e) {
